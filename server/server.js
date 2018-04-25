@@ -8,8 +8,10 @@ var {User} = require('./models/user')
 
 var app = express();
 
+// Midelware to use bodyparse json
 app.use(bodyParser.json());
 
+// POST /todos
 app.post('/todos', (req, res) => {
     var todo = new Todo({
         text: req.body.text
@@ -22,6 +24,19 @@ app.post('/todos', (req, res) => {
     });
 });
 
+// GET /Todos
+app.get('/todos', (req, res) => {
+    Todo.find().then((todos) => {
+        res.send({
+            todos,
+            message: "Nice request"
+        })
+    }, (e) => {
+        res.status(400).send(e);
+    });
+})
+
+// Asigne port to server
 app.listen(3000, () => {
     console.log('Stared on port 3000');
 });
