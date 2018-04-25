@@ -1,5 +1,6 @@
 var express = require('express');
 var bodyParser = require('body-parser');
+const {ObjectID} = require('mongodb');
 
 // Local
 var {mongoose} = require('./db/mongoose');
@@ -24,7 +25,7 @@ app.post('/todos', (req, res) => {
     });
 });
 
-// GET /Todos
+// GET /todos
 app.get('/todos', (req, res) => {
     Todo.find().then((todos) => {
         res.send({
@@ -35,6 +36,20 @@ app.get('/todos', (req, res) => {
         res.status(400).send(e);
     });
 })
+
+// GET /todos/{id}
+app.get('/todos/:id', (req, res) => {
+    var id = req.params.id;
+    if(!ObjectID.isValid(id)){
+        res.status(404).send('Not valid ID');
+    }
+    Todo.findById(id).then((todo) => {
+        if (!todo) {
+            res.status(404).send();
+        }
+        res.status(200).send({todo, message: 'Nice request'});
+    }).catch((e) => res.status(404).send());
+});
 
 // Asigne port to server
 app.listen(3000, () => {

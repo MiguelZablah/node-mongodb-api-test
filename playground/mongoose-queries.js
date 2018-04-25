@@ -5,7 +5,7 @@ const {Todo} = require('./../server/models/todo');
 const {User} = require('./../server/models/user');
 
 // Testing id on db collection todos
-var id = '5ae0b081959b08383877e2b811';
+var id = '5ae0b081959b08383877e2b7';
 
 // Check if id is valid
 // if(!ObjectID.isValid(id)){
