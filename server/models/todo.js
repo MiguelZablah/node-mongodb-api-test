@@ -1,4 +1,4 @@
-var mongoose = require('mongoose');
+const mongoose = require('mongoose');
 
 // Created a Todo Model with properties
 var Todo = mongoose.model('Todo', {
