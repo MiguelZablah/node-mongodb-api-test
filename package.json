@@ -14,6 +14,7 @@
   "author": "Zablah <miguel12979@gmail.com>",
   "license": "ISC",
   "dependencies": {
+    "bcryptjs": "^2.4.3",
     "body-parser": "^1.18.2",
     "crypto-js": "^3.1.9-1",
     "express": "^4.16.3",
