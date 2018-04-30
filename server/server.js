@@ -33,8 +33,6 @@ app.post('/todos', authenticate, (req, res) => {
 
 // GET /todos
 app.get('/todos', authenticate, (req, res) => {
-    console.log(req.user._id);
-    
     Todo.find({
         _creator: req.user._id
     }).then((todos) => {
