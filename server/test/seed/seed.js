@@ -7,6 +7,7 @@ const {User} = require('./../../models/user');
 // Create Seed for db Users
 const userOneId = new ObjectID();
 const userTwoId = new ObjectID();
+
 const users = [{
     _id: userOneId,
     email: 'miguel@gmail.com',
@@ -18,18 +19,24 @@ const users = [{
 },{
     _id: userTwoId,
     email: 'juan@gmail.com',
-    password: 'userTwoPass'
+    password: 'userTwoPass',
+    tokens: [{
+        access: 'auth',
+        token: jwt.sign({_id:userTwoId, access: 'auth'}, 'abc123').toString()
+    }]
 }];
 
 // Create Seed for db Todos
 const todos = [{
         _id: new ObjectID(),
-        text: "First test todo"
+        text: "First test todo",
+        _creator: userOneId
     }, {
         _id: new ObjectID(),
         text: "Second test todo",
         completed: true,
-        completedAt: 333
+        completedAt: 333,
+        _creator: userTwoId
 }];
 
 // Delete all content in collection Todo in db, then populate Todos
